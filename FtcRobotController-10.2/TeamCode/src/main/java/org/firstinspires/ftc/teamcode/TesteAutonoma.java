@@ -11,9 +11,14 @@ import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 @Autonomous
 public class TesteAutonoma extends LinearOpMode {
 
+
+
     @Override
     public void runOpMode() throws InterruptedException {
         SampleMecanumDrive chassi = new SampleMecanumDrive(hardwareMap);
+        Braco bracoColeta = new Braco(hardwareMap, true);
+
+
 
         Pose2d posicaoInicial = new Pose2d(37.5,60, Math.toRadians(0));
         chassi.setPoseEstimate(posicaoInicial);

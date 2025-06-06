@@ -27,12 +27,9 @@ public class Autonoma extends LinearOpMode {
                 .splineTo(new Vector2d(), Math.toRadians(90))
                 .build();
 
-
-
         waitForStart();
 
         chassi.followTrajectory(traj1);
         chassi.followTrajectory(traj2);
-
     }
 }
