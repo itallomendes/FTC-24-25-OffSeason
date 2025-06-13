@@ -6,18 +6,16 @@ import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 @Autonomous
 public class TesteAutonoma extends LinearOpMode {
-
-
+    Braco bracoColeta = new Braco(hardwareMap, true);
 
     @Override
     public void runOpMode() throws InterruptedException {
         SampleMecanumDrive chassi = new SampleMecanumDrive(hardwareMap);
-        Braco bracoColeta = new Braco(hardwareMap, true);
-
 
 
         Pose2d posicaoInicial = new Pose2d(37.5,60, Math.toRadians(0));
