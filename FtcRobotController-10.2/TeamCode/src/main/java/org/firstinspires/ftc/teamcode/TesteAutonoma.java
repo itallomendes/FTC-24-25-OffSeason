@@ -7,11 +7,12 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 @Autonomous
 public class TesteAutonoma extends LinearOpMode {
-    Braco bracoColeta = new Braco(hardwareMap, true);
+    Braco bracoColeta = new Braco(true);
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -51,7 +52,9 @@ public class TesteAutonoma extends LinearOpMode {
                 .lineToLinearHeading(new Pose2d(55,54,Math.toRadians(45)))
                 .build();
 
+
         chassi.followTrajectory(InitialScore);
+
         chassi.followTrajectory(Sample1);
         chassi.followTrajectory(Score1);
         chassi.followTrajectory(Sample2);

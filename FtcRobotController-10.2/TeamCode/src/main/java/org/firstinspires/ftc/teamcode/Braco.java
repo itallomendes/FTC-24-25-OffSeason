@@ -1,14 +1,19 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.control.PIDCoefficients;
 import com.acmerobotics.roadrunner.control.PIDFController;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-public class Braco {
+@TeleOp
+@Config
+public class Braco extends LinearOpMode {
     private DcMotorEx motor;
-
     private PIDFController pid;
     private double targetTicks = 0;
 
@@ -16,8 +21,8 @@ public class Braco {
 
     public static double kF = 0.0;
 
-    public Braco(HardwareMap hm, boolean resetEncoder) {
-        motor = hm.get(DcMotorEx.class, "Braco");
+    public Braco(boolean resetEncoder) {
+        motor = hardwareMap.get(DcMotorEx.class, "modularcoleta");
         if (resetEncoder) {
             motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         }
@@ -42,5 +47,10 @@ public class Braco {
 
     public boolean atTarget() {
         return Math.abs(motor.getCurrentPosition() - targetTicks) < 10;
+    }
+
+    @Override
+    public void runOpMode() throws InterruptedException {
+
     }
 }

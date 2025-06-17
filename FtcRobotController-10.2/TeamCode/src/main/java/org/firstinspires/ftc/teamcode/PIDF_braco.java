@@ -14,8 +14,8 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 @TeleOp
 public class PIDF_braco extends OpMode {
     PIDController controle;
-    public static double p = 0, i = 0, d = 0;
-    public static double f = 0;
+    public static double p = 0.08, i = 0.0002, d = 0.0003;
+    public static double f = 0.13;
 
     public static int target = 0;
 

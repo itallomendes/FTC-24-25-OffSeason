@@ -22,7 +22,7 @@ public class TeleOPDaNacional extends OpMode {
     DcMotorEx motor_Expansao;
 
     float forcaA, forcaB, valorMarchinhaDireitaY, valorMarchinhaDireitaX, forcaDeGiro, forcaTE, forcaDIE, forcaTD, forcaDID;
-    double multiplicadorVelocidade = 1, posicaoVerticalGarra = 0.85, denominator, frontLeftPower, frontRightPower, backRightPower, backLeftPower, botHeading, x, y, rx, rotX, rotY;
+    double multiplicadorVelocidade = 1, posicaoVerticalGarra = 0.25, denominator, frontLeftPower, frontRightPower, backRightPower, backLeftPower, botHeading, x, y, rx, rotX, rotY;
     long tempo, tempodunk;
 
     private PIDController controller;
@@ -31,7 +31,7 @@ public class TeleOPDaNacional extends OpMode {
 
     private final double ticks_in_degree = 1120 / 360.0;
 
-    public int posicaoBraco = 50; //, posicaoY = 50, posicaoB = 100, posicaoX = 250;
+    public int posicaoBraco = 80; //, posicaoY = 50, posicaoB = 100, posicaoX = 250;
 
     double pid = 0, ff = 0, power = 0;
     IMU imu;
@@ -169,13 +169,9 @@ public class TeleOPDaNacional extends OpMode {
             posicaoVerticalGarra = 0.8;
             //ultimoPressionado = "x";
         } else if (gamepad2.y) {
-            posicaoBraco = -10;
-            posicaoVerticalGarra = 0.1;
-            //ultimoPressionado = "y";
-        } else if (gamepad2.b) {
             posicaoBraco = 80;
             posicaoVerticalGarra = 0.8;
-            //ultimoPressionado = "b";
+            //ultimoPressionado = "y";
         }
 
         y = -gamepad1.left_stick_y; // Remember, Y stick value is reversed
@@ -275,3 +271,4 @@ public class TeleOPDaNacional extends OpMode {
         servoGarraBraco.setPower(-gamepad2.right_stick_x * 0.35);
     }
 }
+
