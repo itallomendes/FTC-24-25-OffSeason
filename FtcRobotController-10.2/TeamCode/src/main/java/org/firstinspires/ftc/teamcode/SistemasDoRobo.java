@@ -16,6 +16,11 @@ public class SistemasDoRobo {
             bracoColeta.motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         }
 
+        bracoColeta.setTargetTicks(350); //Baixar o braço até o meio pra não ficar forçando a cesta
+        do {
+            bracoColeta.update(); //Atualizar o PID pra o braço descer, só para quando já está bem próximo da posição desejada
+        } while (!bracoColeta.atTarget());
+
         //DECLARANDO O ELEVADOR
         elevador = new Elevador(hm);
         if (resetaEncoderDoElevador) {
@@ -23,5 +28,6 @@ public class SistemasDoRobo {
         }
 
         cesta = new Cesta(hm);
+        cesta.posicaoInicial();
     }
 }
