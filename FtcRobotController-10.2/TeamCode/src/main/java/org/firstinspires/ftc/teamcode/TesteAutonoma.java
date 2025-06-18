@@ -12,12 +12,10 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 @Autonomous
 public class TesteAutonoma extends LinearOpMode {
-    Braco bracoColeta = new Braco(true);
 
     @Override
     public void runOpMode() throws InterruptedException {
         SampleMecanumDrive chassi = new SampleMecanumDrive(hardwareMap);
-
 
         Pose2d posicaoInicial = new Pose2d(37.5,60, Math.toRadians(0));
         chassi.setPoseEstimate(posicaoInicial);
