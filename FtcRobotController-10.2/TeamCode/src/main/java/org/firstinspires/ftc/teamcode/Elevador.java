@@ -5,47 +5,47 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class Elevador { //FALTA DESCOBRIR OS VALORES CERTINHOS DE CADA POSIÇÃO COM A REDUÇÃO NOVA
-    DcMotor elevador;
+    DcMotor motor;
 
     public void Executar() {
-        elevador.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
     public Elevador(HardwareMap hm) {
-        elevador = hm.dcMotor.get("ExpansaoV");
-        elevador.setDirection(DcMotorSimple.Direction.REVERSE);
-        elevador.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        elevador.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        elevador.setPower(1);
+        motor = hm.dcMotor.get("ExpansaoV");
+        motor.setDirection(DcMotorSimple.Direction.REVERSE);
+        motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        motor.setPower(1);
     }
 
     public void SubirPraCestaAlta() {
-        elevador.setTargetPosition(3000);
+        motor.setTargetPosition(3000);
         Executar();
     }
 
     public void SubirPraCestaBaixa() {
-        elevador.setTargetPosition(2000);
+        motor.setTargetPosition(2000);
         Executar();
     }
 
     public void DescerTotal() {
-        elevador.setTargetPosition(3000);
+        motor.setTargetPosition(3000);
         Executar();
     }
 
     public void DescerPraColetarEspecime() {
-        elevador.setTargetPosition(500);
+        motor.setTargetPosition(500);
         Executar();
     }
 
     public void SubirTrelicaAlta() {
-        elevador.setTargetPosition(2500);
+        motor.setTargetPosition(2500);
         Executar();
     }
 
     public void SubirTrelicaBaixa() {
-        elevador.setTargetPosition(1000);
+        motor.setTargetPosition(1000);
         Executar();
     }
 }

@@ -263,6 +263,7 @@ public class TeleOPDaNacional extends OpMode {
             motor_Expansao.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             motor_Expansao.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         }
+
         servoModularGarraVerticalD.setPosition(posicaoVerticalGarra);
         servoModularGarraVerticalE.setPosition(1-posicaoVerticalGarra);
 

@@ -12,7 +12,7 @@ public class Cesta {
     }
 
     public void posicaoInicial() {
-        cesta.setPosition(1);
+        cesta.setPosition(0.85);
     }
 
     public void Depositar() {
