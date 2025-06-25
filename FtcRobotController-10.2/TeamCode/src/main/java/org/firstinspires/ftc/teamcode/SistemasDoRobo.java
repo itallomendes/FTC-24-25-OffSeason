@@ -30,7 +30,7 @@ public class SistemasDoRobo {
     }
 
     public void baixarBracoColeta() {
-        bracoColeta.setTargetTicks(350); //QUANDO ENCERRA O LOOPING É PORQUE JÁ BAIXOU O BRAÇO ATÉ A POSIÇÃO DE COLETA
+        bracoColeta.setTargetTicks(240); //QUANDO ENCERRA O LOOPING É PORQUE JÁ BAIXOU O BRAÇO ATÉ A POSIÇÃO DE COLETA
         bracoColeta.update();
     }
 

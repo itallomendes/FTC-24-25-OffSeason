@@ -51,33 +51,47 @@ public class TesteAutonoma extends LinearOpMode {
                 .lineToLinearHeading(new Pose2d(55,54,Math.toRadians(45)))
                 .build();
 
+        Runnable updateLoop = () -> {
+            while (opModeIsActive() && chassi.isBusy()) {
+                chassi.update();
+                sistemas.update();
+            }
+        };
+
         sistemas.bracoMeiaAltura();
 
-        chassi.followTrajectory(InitialScore); //TEM QUE FICAR CHAMANDO O SISTEMAS.UPDATE DURANTE TODAS AS TRAJETÓRIAS SIMULTANEAMENTE
+        chassi.followTrajectoryAsync(InitialScore); //TEM QUE FICAR CHAMANDO O SISTEMAS.UPDATE DURANTE TODAS AS TRAJETÓRIAS SIMULTANEAMENTE
+        updateLoop.run();
 
         sistemas.depositar();
 
-        chassi.followTrajectory(Sample1);
+        chassi.followTrajectoryAsync(Sample1);
+        updateLoop.run();
 
         sistemas.coletarSample(); //JÁ PEGA NO CHÃO, SOLTA O SAMPLE NA CESTA E BAIXA O BRAÇO MEIA ALTURA
 
-        chassi.followTrajectory(Score1);
+        chassi.followTrajectoryAsync(Score1);
+        updateLoop.run();
 
         sistemas.depositar();
 
-        chassi.followTrajectory(Sample2);
+        chassi.followTrajectoryAsync(Sample2);
+        updateLoop.run();
 
         sistemas.coletarSample();
 
-        chassi.followTrajectory(Score2);
+        chassi.followTrajectoryAsync(Score2);
+        updateLoop.run();
 
         sistemas.depositar();
 
-        chassi.followTrajectory(Sample3);
+        chassi.followTrajectoryAsync(Sample3);
+        updateLoop.run();
 
         sistemas.coletarSample();
 
         chassi.followTrajectory(Score3);
+        updateLoop.run();
 
         sistemas.depositar();
     }

@@ -164,14 +164,15 @@ public class TeleOPDaNacional extends OpMode {
         }
          */
 
-        if (gamepad2.x) {
+        if (gamepad2.x) { //POSIÇÃO DA COLETA TÁ SENDO 230, vai pra 200 pra n dar uma porrada no chão
             posicaoBraco = 200;
-            posicaoVerticalGarra = 0.8;
-            //ultimoPressionado = "x";
+            posicaoVerticalGarra = 0.1;
         } else if (gamepad2.y) {
-            posicaoBraco = 80;
+            posicaoBraco = 0;
             posicaoVerticalGarra = 0.8;
-            //ultimoPressionado = "y";
+        } else if (gamepad2.b) {
+            posicaoBraco = 100;
+            posicaoVerticalGarra = 0.4;
         }
 
         y = -gamepad1.left_stick_y; // Remember, Y stick value is reversed
@@ -226,7 +227,7 @@ public class TeleOPDaNacional extends OpMode {
 
         if (gamepad1.dpad_up) {
             motor_Expansao.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            motor_Expansao.setTargetPosition(2200);
+            motor_Expansao.setTargetPosition(4100); // JÁ TÁ OK
             motor_Expansao.setPower(1);
             motor_Expansao.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         } else if (gamepad1.dpad_down) {
