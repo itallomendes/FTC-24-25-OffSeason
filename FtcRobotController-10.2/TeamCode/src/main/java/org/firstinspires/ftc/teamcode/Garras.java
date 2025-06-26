@@ -20,13 +20,13 @@ public class Garras {
 
     public void updateModulacao() {
         servoModularGarraVerticalD.setPosition(posicaoVerticalGarra);
-        servoModularGarraVerticalE.setPosition(1-posicaoVerticalGarra);
+        servoModularGarraVerticalE.setPosition(1.1-posicaoVerticalGarra);
     }
 
     public void abrirPinca() {
         long temporizadorDaPinca = System.currentTimeMillis();
         pinca.setPower(0.5);
-        while (System.currentTimeMillis() - temporizadorDaPinca < 500) {
+        while (System.currentTimeMillis() - temporizadorDaPinca < 1000) {
         }
         pinca.setPower(0);
     }
@@ -34,7 +34,7 @@ public class Garras {
     public void fecharPinca() {
         long temporizadorDaPinca = System.currentTimeMillis();
         pinca.setPower(-0.5);
-        while (System.currentTimeMillis() - temporizadorDaPinca < 800) {
+        while (System.currentTimeMillis() - temporizadorDaPinca < 2000) {
         }
         pinca.setPower(0);
     }
@@ -61,7 +61,7 @@ public class Garras {
     }
 
     public void modularPraDentro() {
-        posicaoVerticalGarra = 0.8;
+        posicaoVerticalGarra = 0.75;
         updateModulacao();
     }
 }

@@ -20,7 +20,7 @@ public class Elevador { //FALTA DESCOBRIR OS VALORES CERTINHOS DE CADA POSIÇÃO
     }
 
     public void SubirPraCestaAlta() {
-        motor.setTargetPosition(3000);
+        motor.setTargetPosition(4100);
         Executar();
     }
 
@@ -30,7 +30,7 @@ public class Elevador { //FALTA DESCOBRIR OS VALORES CERTINHOS DE CADA POSIÇÃO
     }
 
     public void DescerTotal() {
-        motor.setTargetPosition(3000);
+        motor.setTargetPosition(0);
         Executar();
     }
 

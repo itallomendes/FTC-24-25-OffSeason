@@ -24,31 +24,31 @@ public class TesteAutonoma extends LinearOpMode {
         waitForStart();
 
         Trajectory InitialScore = chassi.trajectoryBuilder(posicaoInicial, true)
-                .lineToLinearHeading(new Pose2d(55,54,Math.toRadians(45)))
+                .lineToLinearHeading(new Pose2d(53,52,Math.toRadians(45)))
                 .build();
 
         Trajectory Sample1 = chassi.trajectoryBuilder(InitialScore.end(), true)
-                .lineToLinearHeading(new Pose2d(48,37,Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(48,39,Math.toRadians(90)))
                 .build();
 
         Trajectory Score1 = chassi.trajectoryBuilder(Sample1.end(), true)
-                .lineToLinearHeading(new Pose2d(55,54,Math.toRadians(45)))
+                .lineToLinearHeading(new Pose2d(53,52,Math.toRadians(45)))
                 .build();
 
         Trajectory Sample2 = chassi.trajectoryBuilder(Score1.end(), true)
-                .lineToLinearHeading(new Pose2d(58,37,Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(58,39,Math.toRadians(90)))
                 .build();
 
         Trajectory Score2 = chassi.trajectoryBuilder(Sample2.end(), true)
-                .lineToLinearHeading(new Pose2d(55,54,Math.toRadians(45)))
+                .lineToLinearHeading(new Pose2d(53,52,Math.toRadians(45)))
                 .build();
 
         Trajectory Sample3 = chassi.trajectoryBuilder(Score2.end(), true)
-                .lineToLinearHeading(new Pose2d(55,37,Math.toRadians(135)))
+                .lineToLinearHeading(new Pose2d(55,39,Math.toRadians(135)))
                 .build();
 
         Trajectory Score3 = chassi.trajectoryBuilder(Sample3.end(), true)
-                .lineToLinearHeading(new Pose2d(55,54,Math.toRadians(45)))
+                .lineToLinearHeading(new Pose2d(53,52, Math.toRadians(45)))
                 .build();
 
         Runnable updateLoop = () -> {
@@ -75,7 +75,7 @@ public class TesteAutonoma extends LinearOpMode {
 
         sistemas.depositar();
 
-        chassi.followTrajectoryAsync(Sample2);
+        /* chassi.followTrajectoryAsync(Sample2);
         updateLoop.run();
 
         sistemas.coletarSample();
@@ -94,6 +94,8 @@ public class TesteAutonoma extends LinearOpMode {
         updateLoop.run();
 
         sistemas.depositar();
+
+         */
     }
 
 

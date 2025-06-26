@@ -21,7 +21,7 @@ public class Braco {
         motor.setDirection(DcMotorSimple.Direction.REVERSE);
         motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        pid = new PIDController(0.08, 0.0002, 0.0003); //f = 0.13
+        pid = new PIDController(0.035,0.2, 0.00125); //f = 0.13
     }
 
     public void setTargetTicks(int ticks) {
@@ -29,17 +29,20 @@ public class Braco {
     }
 
     public void update() {
-        pid.setPID(0.08, 0.0002, 0.0003);
+        pid.setPID(0.035, 0.2, 0.00125);
 
         current = motor.getCurrentPosition();
 
         double calculoPID = pid.calculate(current, targetTicks);
-        double ff = Math.cos(Math.toRadians(targetTicks / (1120/360))) * 0.13;
+        double ff = Math.cos(Math.toRadians(targetTicks / (1120/360))) * 0.12;
 
         double power = calculoPID + ff;
 
+        power = Math.max(Math.min(power, 0.5), -0.8);
+
         motor.setPower(power);
     }
+
 
     public boolean atTarget() {
         return Math.abs(motor.getCurrentPosition() - targetTicks) < 10;

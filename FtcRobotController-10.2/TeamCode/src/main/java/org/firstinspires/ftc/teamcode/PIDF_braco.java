@@ -6,14 +6,16 @@ import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.arcrobotics.ftclib.controller.PIDController;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 @Config
 @TeleOp
 public class PIDF_braco extends OpMode {
     PIDController controle;
-    public static double p = 0.08, i = 0.0002, d = 0.0003;
-    public static double f = 0.13;
+    public static double p = 0.035, i = 0.2, d = 0.00125;
+    public static double f = 0.12;
 
     public static int target = 0;
 
@@ -27,6 +29,9 @@ public class PIDF_braco extends OpMode {
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
 
         motor = hardwareMap.get(DcMotorEx.class, "modularcoleta");
+        motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motor.setDirection(DcMotorSimple.Direction.REVERSE);
     }
 
     @Override

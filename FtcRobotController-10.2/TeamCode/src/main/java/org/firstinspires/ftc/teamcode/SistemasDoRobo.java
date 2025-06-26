@@ -8,6 +8,7 @@ public class SistemasDoRobo {
     Elevador elevador;
     Cesta cesta;
     Garras garras;
+    long temporizadorTransferencia;
     public SistemasDoRobo(HardwareMap hm, boolean resetaEncoderDoBraco, boolean resetaEncoderDoElevador) {
 
         //DECLARANDO O BRAÇO DA COLETA E RESETANDO ENCODER
@@ -40,7 +41,7 @@ public class SistemasDoRobo {
     }
 
     public void bracoMeiaAltura() { //QUANDO ENCERRA O LOOPING É PORQUE JÁ DEIXOU O BRAÇO A MEIA ALTURA
-        bracoColeta.setTargetTicks(180);
+        bracoColeta.setTargetTicks(150);
         bracoColeta.update();
     }
 
@@ -51,6 +52,8 @@ public class SistemasDoRobo {
         }
         cesta.Depositar();
         elevador.DescerTotal();
+        while (elevador.motor.isBusy()) {
+        }
     }
 
     public void update() {
@@ -62,13 +65,25 @@ public class SistemasDoRobo {
     public void coletarSample() {
         garras.modularPraFora();
         baixarBracoColeta();
-        while (!bracoColeta.atTarget()) {}
+        while (!bracoColeta.atTarget()) {
+            bracoColeta.update();
+        }
         garras.fecharPinca();
+        temporizadorTransferencia = System.currentTimeMillis();
+        while (System.currentTimeMillis() - temporizadorTransferencia < 1000) {}
         garras.modularPraDentro();
         subirBracoTransferencia();
-        while (!bracoColeta.atTarget()) {}
+        while (!bracoColeta.atTarget()) {
+            bracoColeta.update();
+        }
         garras.abrirPinca();
+        temporizadorTransferencia = System.currentTimeMillis();
+        while (System.currentTimeMillis() - temporizadorTransferencia < 1000) {
+            update();
+        }
         bracoMeiaAltura();
-        while (!bracoColeta.atTarget()) {}
+        while (!bracoColeta.atTarget()) {
+            bracoColeta.update();
+        }
     }
 }

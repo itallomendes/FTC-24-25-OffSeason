@@ -52,8 +52,8 @@ public class Teleop extends OpMode {
         modularPincaVerticalD = hardwareMap.servo.get("ModularD");
         modularPincaVerticalE = hardwareMap.servo.get("ModularE");
 
-        expansaoHE = hardwareMap.servo.get("expansaoesqr");
-        expansaoHD = hardwareMap.servo.get("expansaodir");
+        //expansaoHE = hardwareMap.servo.get("expansaoesqr");
+        //expansaoHD = hardwareMap.servo.get("expansaodir");
 
         DIE = hardwareMap.dcMotor.get("DiE");
         TE = hardwareMap.dcMotor.get("TE");
@@ -85,9 +85,6 @@ public class Teleop extends OpMode {
     public void loop() {
         modularcoleta.setPower(0.8);
         //modulardunk.setPower(0.8);
-
-        expansaoHD.setPosition(1-posicaoExpansaoH);
-        expansaoHE.setPosition(posicaoExpansaoH);
 
         double y = -gamepad1.left_stick_y; // Remember, Y stick value is reversed
         double x = gamepad1.left_stick_x; //robô tava andando lateralmente pro lado errado, rever isso

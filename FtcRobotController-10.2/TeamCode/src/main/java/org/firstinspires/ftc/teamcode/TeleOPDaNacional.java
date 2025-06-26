@@ -27,11 +27,11 @@ public class TeleOPDaNacional extends OpMode {
 
     private PIDController controller;
 
-    public static double p = 0.015, i = 0, d = 0.001, f = -0.2;
+    public static double p = 0.035, i = 0.2, d = 0.00125, f = 0.12;
 
-    private final double ticks_in_degree = 1120 / 360.0;
+    private final double ticks_in_degree = 560 / 180.0;
 
-    public int posicaoBraco = 80; //, posicaoY = 50, posicaoB = 100, posicaoX = 250;
+    public int posicaoBraco = 0; //, posicaoY = 50, posicaoB = 100, posicaoX = 250;
 
     double pid = 0, ff = 0, power = 0;
     IMU imu;
@@ -266,7 +266,7 @@ public class TeleOPDaNacional extends OpMode {
         }
 
         servoModularGarraVerticalD.setPosition(posicaoVerticalGarra);
-        servoModularGarraVerticalE.setPosition(1-posicaoVerticalGarra);
+        servoModularGarraVerticalE.setPosition(1.1-posicaoVerticalGarra);
 
         servoGarraPinca.setPower(gamepad2.left_stick_x * 0.5); //Abre e fecha a pinça
 
