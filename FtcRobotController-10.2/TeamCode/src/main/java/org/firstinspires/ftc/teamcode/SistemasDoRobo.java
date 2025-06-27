@@ -1,14 +1,18 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.acmerobotics.dashboard.config.Config;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
+@Config
 public class SistemasDoRobo {
     Braco bracoColeta;
     Elevador elevador;
     Cesta cesta;
     Garras garras;
-    long temporizadorTransferencia;
+    long temporizadorMovimento;
+    int delay;
     public SistemasDoRobo(HardwareMap hm, boolean resetaEncoderDoBraco, boolean resetaEncoderDoElevador) {
 
         //DECLARANDO O BRAÇO DA COLETA E RESETANDO ENCODER
@@ -23,6 +27,7 @@ public class SistemasDoRobo {
         if (resetaEncoderDoElevador) {
             elevador.motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         }
+        elevador.DescerTotal();
 
         cesta = new Cesta(hm);
         cesta.posicaoInicial();
@@ -31,29 +36,32 @@ public class SistemasDoRobo {
     }
 
     public void baixarBracoColeta() {
-        bracoColeta.setTargetTicks(240); //QUANDO ENCERRA O LOOPING É PORQUE JÁ BAIXOU O BRAÇO ATÉ A POSIÇÃO DE COLETA
-        bracoColeta.update();
+        bracoColeta.setTargetTicks(280); //QUANDO ENCERRA O LOOPING É PORQUE JÁ BAIXOU O BRAÇO ATÉ A POSIÇÃO DE COLETA
+        //bracoColeta.update();
+        temporizadorMovimento = System.currentTimeMillis();
     }
 
     public void subirBracoTransferencia() {
-        bracoColeta.setTargetTicks(0); //QUANDO ENCERRA O LOOPING É PORQUE JÁ SUBIU O BRAÇO ATÉ A POSIÇÃO DE TRANSFERÊNCIA
+        bracoColeta.setTargetTicks(20); //QUANDO ENCERRA O LOOPING É PORQUE JÁ SUBIU O BRAÇO ATÉ A POSIÇÃO DE TRANSFERÊNCIA
         bracoColeta.update();
+        temporizadorMovimento = System.currentTimeMillis();
     }
 
     public void bracoMeiaAltura() { //QUANDO ENCERRA O LOOPING É PORQUE JÁ DEIXOU O BRAÇO A MEIA ALTURA
         bracoColeta.setTargetTicks(150);
         bracoColeta.update();
+        temporizadorMovimento = System.currentTimeMillis();
     }
 
     public void depositar() { //SOBE E PONTUA
         bracoMeiaAltura();
         elevador.SubirPraCestaAlta();
-        while (elevador.motor.isBusy()) {
+        sleep(250);
+        while (!elevador.atTarget()) {
         }
         cesta.Depositar();
         elevador.DescerTotal();
-        while (elevador.motor.isBusy()) {
-        }
+        sleep(250);
     }
 
     public void update() {
@@ -62,28 +70,48 @@ public class SistemasDoRobo {
         garras.updateModulacao();
     }
 
+    public void sleep(long tempo) {
+        long temporizadorSleep = System.currentTimeMillis();
+        while (System.currentTimeMillis() - temporizadorSleep < tempo) {update();}
+    }
+
     public void coletarSample() {
+        delay = 250;
         garras.modularPraFora();
+
+        sleep(delay);
+
         baixarBracoColeta();
-        while (!bracoColeta.atTarget()) {
-            bracoColeta.update();
-        }
-        garras.fecharPinca();
-        temporizadorTransferencia = System.currentTimeMillis();
-        while (System.currentTimeMillis() - temporizadorTransferencia < 1000) {}
-        garras.modularPraDentro();
-        subirBracoTransferencia();
-        while (!bracoColeta.atTarget()) {
-            bracoColeta.update();
-        }
-        garras.abrirPinca();
-        temporizadorTransferencia = System.currentTimeMillis();
-        while (System.currentTimeMillis() - temporizadorTransferencia < 1000) {
+        while (!bracoColeta.atTarget() && (System.currentTimeMillis() - temporizadorMovimento) < 1000) {
             update();
         }
+
+        sleep(delay);
+
+        garras.fecharPinca();
+
+        sleep(250);
+
+        garras.modularPraDentro();
+
+        subirBracoTransferencia();
+        while (!bracoColeta.atTarget() && (System.currentTimeMillis() - temporizadorMovimento) < 1000) {
+            update();
+        }
+
+        sleep(delay*4);
+
+        garras.abrirPinca();
+
+        sleep(delay);
+
         bracoMeiaAltura();
-        while (!bracoColeta.atTarget()) {
-            bracoColeta.update();
+
+        //telemetry.addData("Status coleta", "Já COLOQUEI BRAÇO MEIA ALTURA");
+        //telemetry.update();
+
+        while (!bracoColeta.atTarget() && (System.currentTimeMillis() - temporizadorMovimento) < 1000) {
+            update();
         }
     }
 }

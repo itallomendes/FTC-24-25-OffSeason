@@ -23,14 +23,6 @@ public class SoColeta extends LinearOpMode {
         Pose2d posicaoInicial = new Pose2d(37.5,60, Math.toRadians(0));
         chassi.setPoseEstimate(posicaoInicial);
 
-        sistemas.bracoMeiaAltura();
-        temporizadorDescidaBraco = System.currentTimeMillis();
-        while (System.currentTimeMillis() - temporizadorDescidaBraco < 2000) {
-            sistemas.update();
-        }
-
-        waitForStart();
-
         Trajectory InitialScore = chassi.trajectoryBuilder(posicaoInicial, true)
                 .lineToLinearHeading(new Pose2d(53,52,Math.toRadians(45)))
                 .build();
@@ -59,16 +51,16 @@ public class SoColeta extends LinearOpMode {
                 .lineToLinearHeading(new Pose2d(53,52,Math.toRadians(45)))
                 .build();
 
-        Runnable updateLoop = () -> {
-            while (opModeIsActive() && chassi.isBusy()) {
-                chassi.update();
-                sistemas.update();
-            }
-        };
+        sistemas.bracoMeiaAltura();
+        sistemas.sleep(2000);
+
+        telemetry.update();
+
+        waitForStart();
 
         sistemas.coletarSample();
         sistemas.subirBracoTransferencia();
-        while (!sistemas.bracoColeta.atTarget()) {sistemas.update();}
+        sleep(2000);
 
         /* chassi.followTrajectoryAsync(Sample2);
         updateLoop.run();

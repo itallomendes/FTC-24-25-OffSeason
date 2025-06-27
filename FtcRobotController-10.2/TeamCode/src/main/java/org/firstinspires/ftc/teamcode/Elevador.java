@@ -48,4 +48,8 @@ public class Elevador { //FALTA DESCOBRIR OS VALORES CERTINHOS DE CADA POSIÇÃO
         motor.setTargetPosition(1000);
         Executar();
     }
+
+    public boolean atTarget() {
+        return Math.abs(motor.getCurrentPosition() - motor.getTargetPosition()) < 10;
+    }
 }

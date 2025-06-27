@@ -19,7 +19,7 @@ public class Braco {
         motor = hardwareMap.get(DcMotorEx.class, "modularcoleta");
         motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         motor.setDirection(DcMotorSimple.Direction.REVERSE);
-        motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
 
         pid = new PIDController(0.035,0.2, 0.00125); //f = 0.13
     }
@@ -38,7 +38,7 @@ public class Braco {
 
         double power = calculoPID + ff;
 
-        power = Math.max(Math.min(power, 0.5), -0.8);
+        power = Math.max(Math.min(power, 0.2), -0.7);
 
         motor.setPower(power);
     }

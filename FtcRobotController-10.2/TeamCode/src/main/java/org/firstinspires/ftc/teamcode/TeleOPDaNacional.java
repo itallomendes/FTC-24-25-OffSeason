@@ -113,6 +113,8 @@ public class TeleOPDaNacional extends OpMode {
 
         power = pid + ff;
 
+        power = Math.max(Math.min(power, 0.2), -0.7);
+
         modularBraco.setPower(power);
 
         if (gamepad2.dpad_up && (System.currentTimeMillis() - tempo) > 50) {
