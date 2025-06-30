@@ -181,9 +181,6 @@ public class TeleOPDaNacional extends OpMode {
         x = gamepad1.left_stick_x; //robô tava andando lateralmente pro lado errado, rever isso
         rx = gamepad1.right_trigger - gamepad1.left_trigger;
 
-        // This button choice was made so that it is hard to hit on accident,
-        // it can be freely changed based on preference.
-        // The equivalent button is start on Xbox-style controllers.
         if (gamepad1.y) {
             imu.resetYaw();
         }
@@ -275,4 +272,3 @@ public class TeleOPDaNacional extends OpMode {
         servoGarraBraco.setPower(-gamepad2.right_stick_x * 0.35);
     }
 }
-
