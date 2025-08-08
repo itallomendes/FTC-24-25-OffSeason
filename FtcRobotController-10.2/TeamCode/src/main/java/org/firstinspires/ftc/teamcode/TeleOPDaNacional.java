@@ -53,7 +53,7 @@ public class TeleOPDaNacional extends OpMode {
         motorTD = hardwareMap.get(DcMotor.class, "TD");
         motorTE = hardwareMap.get(DcMotor.class, "TE");
 
-        /*
+
         motorSE = hardwareMap.get(DcMotor.class, "SE");
         motorSD = hardwareMap.get(DcMotor.class, "SD");
         motorSE.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -64,7 +64,7 @@ public class TeleOPDaNacional extends OpMode {
 
         motorSE.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motorSD.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        */
+
 
         modularBraco = hardwareMap.get(DcMotor.class, "modularcoleta");
         modularBraco.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -100,10 +100,11 @@ public class TeleOPDaNacional extends OpMode {
 
     @Override
     public void loop() {
-        telemetry.addData("Expansão", motor_Expansao.getCurrentPosition()); //395 a posição pra pegar o espécime na parede
-        telemetry.addData("Braço", modularBraco.getCurrentPosition());
+        //telemetry.addData("Expansão", motor_Expansao.getCurrentPosition()); //395 a posição pra pegar o espécime na parede
+        //telemetry.addData("Braço", modularBraco.getCurrentPosition());
         telemetry.addData("Variável Braço", posicaoBraco);
-        telemetry.addData("Posição Garra Vertical", posicaoVerticalGarra);
+        //telemetry.addData("Posição Garra Vertical", posicaoVerticalGarra);
+        telemetry.addData("SuspensãoD", motorSD.getCurrentPosition());
 
         telemetry.update();
 
@@ -135,14 +136,12 @@ public class TeleOPDaNacional extends OpMode {
 
         posicaoVerticalGarra = Math.min(Math.max(posicaoVerticalGarra, 0.1), 0.9);
 
-        /*
-
         if (gamepad2.left_bumper) {
             motorSE.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             motorSD.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-            motorSD.setTargetPosition(-200);
-            motorSE.setTargetPosition(-200);
+            motorSD.setTargetPosition(-50);
+            motorSE.setTargetPosition(-50);
 
             motorSD.setPower(-1);
             motorSE.setPower(-1);
@@ -155,8 +154,8 @@ public class TeleOPDaNacional extends OpMode {
             motorSE.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             motorSD.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-            motorSD.setTargetPosition(-6000);
-            motorSE.setTargetPosition(-6000);
+            motorSD.setTargetPosition(4000);
+            motorSE.setTargetPosition(4000);
 
             motorSD.setPower(1);
             motorSE.setPower(1);
@@ -164,7 +163,8 @@ public class TeleOPDaNacional extends OpMode {
             motorSD.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             motorSE.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         }
-         */
+
+
 
         if (gamepad2.x) { //POSIÇÃO DA COLETA TÁ SENDO 230, vai pra 200 pra n dar uma porrada no chão
             posicaoBraco = 200;

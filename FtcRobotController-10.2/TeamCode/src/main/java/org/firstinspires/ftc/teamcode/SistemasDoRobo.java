@@ -76,7 +76,7 @@ public class SistemasDoRobo {
     }
 
     public void coletarSample() {
-        delay = 250;
+        delay = 200;
         garras.modularPraFora();
 
         sleep(delay);
@@ -90,16 +90,18 @@ public class SistemasDoRobo {
 
         garras.fecharPinca();
 
-        sleep(250);
+        sleep(200);
 
         garras.modularPraDentro();
+        
+        sleep(200);
 
         subirBracoTransferencia();
         while (!bracoColeta.atTarget() && (System.currentTimeMillis() - temporizadorMovimento) < 1000) {
             update();
         }
 
-        sleep(delay*4);
+        sleep(delay);
 
         garras.abrirPinca();
 
