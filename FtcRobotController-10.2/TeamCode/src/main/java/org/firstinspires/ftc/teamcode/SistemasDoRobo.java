@@ -12,6 +12,7 @@ public class SistemasDoRobo {
     Cesta cesta;
     Garras garras;
     long temporizadorMovimento;
+    long TempElevador;
     int delay;
     public SistemasDoRobo(HardwareMap hm, boolean resetaEncoderDoBraco, boolean resetaEncoderDoElevador) {
 
@@ -101,7 +102,7 @@ public class SistemasDoRobo {
             update();
         }
 
-        sleep(delay);
+        sleep(250);
 
         garras.abrirPinca();
 
@@ -109,11 +110,29 @@ public class SistemasDoRobo {
 
         bracoMeiaAltura();
 
+        sleep(200);
+
         //telemetry.addData("Status coleta", "Já COLOQUEI BRAÇO MEIA ALTURA");
         //telemetry.update();
 
         while (!bracoColeta.atTarget() && (System.currentTimeMillis() - temporizadorMovimento) < 1000) {
             update();
         }
+
+    }
+    public void ExpandirT() {
+        elevador.SubirTrelicaAlta();
+
+        TempElevador = System.currentTimeMillis();
+        while (System.currentTimeMillis() - TempElevador < 500){
+            update();
+        }
+    }
+    public void PontuarSpecimen() {
+        elevador.Descerpontuar();
+        garras.fecharGarra();
+        sleep(800);
+        garras.abrirGarra();
+
     }
 }

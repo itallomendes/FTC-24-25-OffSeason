@@ -154,8 +154,8 @@ public class TeleOPDaNacional extends OpMode {
             motorSE.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             motorSD.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-            motorSD.setTargetPosition(4000);
-            motorSE.setTargetPosition(4000);
+            motorSD.setTargetPosition(5500);
+            motorSE.setTargetPosition(5500);
 
             motorSD.setPower(1);
             motorSE.setPower(1);
@@ -226,7 +226,7 @@ public class TeleOPDaNacional extends OpMode {
 
         if (gamepad1.dpad_up) {
             motor_Expansao.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            motor_Expansao.setTargetPosition(4100); // JÁ TÁ OK
+            motor_Expansao.setTargetPosition(3800); // JÁ TÁ OK
             motor_Expansao.setPower(1);
             motor_Expansao.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         } else if (gamepad1.dpad_down) {

@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 public class Garras {
     CRServo pinca, garra;
     Servo servoModularGarraVerticalD, servoModularGarraVerticalE;
-    double posicaoVerticalGarra = 0.1; //GARRA COMEÇA PRA FORA DA CESTA
+    double posicaoVerticalGarra = 0.5; //GARRA COMEÇA PRA FORA DA CESTA
     public Garras(HardwareMap hm) {
         servoModularGarraVerticalE = hm.get(Servo.class, "ModularE");
         servoModularGarraVerticalD = hm.get(Servo.class, "ModularD");

@@ -20,7 +20,7 @@ public class Elevador { //FALTA DESCOBRIR OS VALORES CERTINHOS DE CADA POSIÇÃO
     }
 
     public void SubirPraCestaAlta() {
-        motor.setTargetPosition(4100);
+        motor.setTargetPosition(3850);
         Executar();
     }
 
@@ -35,21 +35,22 @@ public class Elevador { //FALTA DESCOBRIR OS VALORES CERTINHOS DE CADA POSIÇÃO
     }
 
     public void DescerPraColetarEspecime() {
-        motor.setTargetPosition(500);
+        motor.setTargetPosition(300);
         Executar();
     }
 
     public void SubirTrelicaAlta() {
-        motor.setTargetPosition(2500);
+        motor.setTargetPosition(2700);
         Executar();
     }
 
-    public void SubirTrelicaBaixa() {
-        motor.setTargetPosition(1000);
+    public void Descerpontuar() {
+        motor.setTargetPosition(1400);
         Executar();
     }
 
     public boolean atTarget() {
         return Math.abs(motor.getCurrentPosition() - motor.getTargetPosition()) < 10;
     }
+
 }
