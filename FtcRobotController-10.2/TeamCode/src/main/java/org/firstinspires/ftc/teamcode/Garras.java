@@ -7,6 +7,8 @@ import com.qualcomm.robotcore.hardware.Servo;
 public class Garras {
     CRServo pinca, garra;
     Servo servoModularGarraVerticalD, servoModularGarraVerticalE;
+
+    long temporizadorDaPinca;
     double posicaoVerticalGarra = 0.5; //GARRA COMEÇA PRA FORA DA CESTA
     public Garras(HardwareMap hm) {
         servoModularGarraVerticalE = hm.get(Servo.class, "ModularE");
@@ -32,7 +34,7 @@ public class Garras {
     }
 
     public void fecharPinca() {
-        long temporizadorDaPinca = System.currentTimeMillis();
+        temporizadorDaPinca = System.currentTimeMillis();
         pinca.setPower(-0.5);
         while (System.currentTimeMillis() - temporizadorDaPinca < 2000) {
         }
@@ -47,6 +49,19 @@ public class Garras {
         garra.setPower(0);
     }
 
+    public void forcarGarra() {
+        long temporizadorDaGarra = System.currentTimeMillis();
+        garra.setPower(-1);
+    }
+
+    public void forcarpinca() {
+        temporizadorDaPinca = System.currentTimeMillis();
+        garra.setPower(-7);
+        while (System.currentTimeMillis() - temporizadorDaPinca < 2000) {
+
+        }
+    }
+
     public void fecharGarra() {
         long temporizadorDaGarra = System.currentTimeMillis();
         garra.setPower(-0.5);
@@ -56,12 +71,12 @@ public class Garras {
     }
 
     public void modularPraFora() {
-        posicaoVerticalGarra = 0.1;
+        posicaoVerticalGarra = 0.2;
         updateModulacao();
     }
 
     public void modularPraDentro() {
-        posicaoVerticalGarra = 0.75;
+        posicaoVerticalGarra = 0.85;
         updateModulacao();
     }
 }

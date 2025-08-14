@@ -45,7 +45,7 @@ public class Elevador { //FALTA DESCOBRIR OS VALORES CERTINHOS DE CADA POSIÇÃO
     }
 
     public void Descerpontuar() {
-        motor.setTargetPosition(1400);
+        motor.setTargetPosition(1600);
         Executar();
     }
 

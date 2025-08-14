@@ -12,7 +12,7 @@ public class SistemasDoRobo {
     Cesta cesta;
     Garras garras;
     long temporizadorMovimento;
-    long TempElevador;
+    long TempElevador, tempgarra;
     int delay;
     public SistemasDoRobo(HardwareMap hm, boolean resetaEncoderDoBraco, boolean resetaEncoderDoElevador) {
 
@@ -54,12 +54,13 @@ public class SistemasDoRobo {
         temporizadorMovimento = System.currentTimeMillis();
     }
 
-    public void depositar() { //SOBE E PONTUA
+    public void CestaAlta() {
         bracoMeiaAltura();
         elevador.SubirPraCestaAlta();
         sleep(250);
-        while (!elevador.atTarget()) {
-        }
+    }
+    public void depositar() {//SOBE E PONTUA
+        sleep(500);
         cesta.Depositar();
         elevador.DescerTotal();
         sleep(250);
@@ -83,8 +84,7 @@ public class SistemasDoRobo {
         sleep(delay);
 
         baixarBracoColeta();
-        while (!bracoColeta.atTarget() && (System.currentTimeMillis() - temporizadorMovimento) < 1000) {
-            update();
+        while (!bracoColeta.atTarget() && (System.currentTimeMillis() - temporizadorMovimento) < 800) {
         }
 
         sleep(delay);
@@ -98,11 +98,10 @@ public class SistemasDoRobo {
         sleep(200);
 
         subirBracoTransferencia();
-        while (!bracoColeta.atTarget() && (System.currentTimeMillis() - temporizadorMovimento) < 1000) {
-            update();
+        while (!bracoColeta.atTarget() && (System.currentTimeMillis() - temporizadorMovimento) < 500) {
         }
 
-        sleep(250);
+        sleep(550);
 
         garras.abrirPinca();
 
@@ -116,23 +115,30 @@ public class SistemasDoRobo {
         //telemetry.update();
 
         while (!bracoColeta.atTarget() && (System.currentTimeMillis() - temporizadorMovimento) < 1000) {
-            update();
         }
 
     }
     public void ExpandirT() {
         elevador.SubirTrelicaAlta();
-
+        garras.forcarGarra();
         TempElevador = System.currentTimeMillis();
-        while (System.currentTimeMillis() - TempElevador < 500){
+        while (System.currentTimeMillis() - TempElevador < 700){
             update();
         }
     }
     public void PontuarSpecimen() {
         elevador.Descerpontuar();
-        garras.fecharGarra();
         sleep(800);
         garras.abrirGarra();
+        elevador.DescerTotal();
+    }
 
+    public void ColetarSpecimen() {
+        garras.fecharGarra();
+        tempgarra = System.currentTimeMillis();
+        while (System.currentTimeMillis() - tempgarra < 300) {
+
+        }
+        elevador.SubirPraCestaBaixa();
     }
 }

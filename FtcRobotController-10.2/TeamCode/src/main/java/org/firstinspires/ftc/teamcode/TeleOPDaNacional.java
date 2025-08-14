@@ -21,6 +21,7 @@ public class TeleOPDaNacional extends OpMode {
     Servo servoCesta, servoModularGarraVerticalD, servoModularGarraVerticalE;
     DcMotorEx motor_Expansao;
 
+    int fly = 0;
     float forcaA, forcaB, valorMarchinhaDireitaY, valorMarchinhaDireitaX, forcaDeGiro, forcaTE, forcaDIE, forcaTD, forcaDID;
     double multiplicadorVelocidade = 1, posicaoVerticalGarra = 0.25, denominator, frontLeftPower, frontRightPower, backRightPower, backLeftPower, botHeading, x, y, rx, rotX, rotY;
     long tempo, tempodunk;
@@ -270,5 +271,34 @@ public class TeleOPDaNacional extends OpMode {
         servoGarraPinca.setPower(gamepad2.left_stick_x * 0.5); //Abre e fecha a pinça
 
         servoGarraBraco.setPower(-gamepad2.right_stick_x * 0.35);
+
+        if (gamepad1.left_bumper && fly % 2 == 0) {
+            fly += 1;
+            motorSE.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            motorSD.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+            motorSD.setTargetPosition(5500);
+            motorSE.setTargetPosition(5500);
+
+            motorSD.setPower(1);
+            motorSE.setPower(1);
+
+            motorSD.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            motorSE.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        } else if (gamepad1.left_bumper) {
+            fly += 1;
+            motorSE.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            motorSD.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+            motorSD.setTargetPosition(-50);
+            motorSE.setTargetPosition(-50);
+
+            motorSD.setPower(-1);
+            motorSE.setPower(-1);
+
+            motorSD.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            motorSE.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            posicaoBraco = 80;
+        }
     }
 }

@@ -6,8 +6,9 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
+
 @Autonomous
-public class AutonomaNet extends LinearOpMode {
+public class AutonomaNetB extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -40,16 +41,9 @@ public class AutonomaNet extends LinearOpMode {
                 .build();
 
         Trajectory Sample3 = chassi.trajectoryBuilder(Score2.end(), true)
-                .lineToLinearHeading(new Pose2d(55,7,Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(55,51,Math.toRadians(90)))
                 .build();
 
-        Trajectory Empurrar = chassi.trajectoryBuilder(Sample3.end(), true)
-                .lineToLinearHeading(new Pose2d(62,7, Math.toRadians(90)))
-                .build();
-
-        Trajectory Empurrar_ = chassi.trajectoryBuilder(Empurrar.end(), true)
-             .lineToLinearHeading(new Pose2d(62,52, Math.toRadians(90)))
-                    .build();
 
         Runnable updateLoop = () -> {
             while (opModeIsActive() && chassi.isBusy()) {
@@ -88,9 +82,7 @@ public class AutonomaNet extends LinearOpMode {
 
         chassi.followTrajectoryAsync(Sample3);
         updateLoop.run();
-        chassi.followTrajectoryAsync(Empurrar);
-        updateLoop.run();
-        chassi.followTrajectoryAsync(Empurrar_);
+
         /*
         chassi.followTrajectoryAsync(Sample3);
         updateLoop.run();
