@@ -136,7 +136,7 @@ public class TeleOPDaNacional extends OpMode {
         }
 
         posicaoVerticalGarra = Math.min(Math.max(posicaoVerticalGarra, 0.1), 0.9);
-
+/*
         if (gamepad2.left_bumper) {
             motorSE.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             motorSD.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -165,6 +165,14 @@ public class TeleOPDaNacional extends OpMode {
             motorSE.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         }
 
+ */
+        if (gamepad2.right_stick_button) {
+            modularBraco.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            modularBraco.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        } else if (gamepad1.right_stick_button) {
+            motor_Expansao.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            motor_Expansao.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        }
 
 
         if (gamepad2.x) { //POSIÇÃO DA COLETA TÁ SENDO 230, vai pra 200 pra n dar uma porrada no chão

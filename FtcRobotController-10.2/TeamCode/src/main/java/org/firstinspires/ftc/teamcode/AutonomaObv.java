@@ -70,6 +70,12 @@ public class AutonomaObv extends LinearOpMode {
                 .lineToLinearHeading(new Pose2d(-42, 61, Math.toRadians(90)))
                 .build();
 
+        /*Trajectory Specimen2_ = chassi.trajectoryBuilder(Specimen2.end(),true)
+                .lineToLinearHeading(new Pose2d(-42,61, Math.toRadians(90)))
+                .build();
+
+         */
+
         Trajectory Specimen2T = chassi.trajectoryBuilder(Specimen2.end(), true)
                 .lineToLinearHeading(new Pose2d(-4, 34, Math.toRadians(-90)))
                 .build();
